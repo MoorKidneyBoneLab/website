@@ -100,7 +100,7 @@ a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-rad
 .qtl-fig img {
   display: block;
   width: 100%;
-  max-width: 620px;
+  max-width: 920px;
   height: auto;
   background: #fff;          /* the plot has a white background; keep it framed in dark mode */
   padding: 0.5rem;
