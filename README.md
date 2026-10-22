@@ -3,7 +3,7 @@
 Plain HTML and CSS, no frameworks, no build step. The public page uses no JavaScript.
 A built-in editor in `admin/` lets you change the text in your browser.
 
-## Folder structure
+## Folder structure 
 
 ```
 website/
