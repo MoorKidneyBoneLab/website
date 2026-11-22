@@ -146,6 +146,10 @@ a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-rad
 .news-list figure { margin: 0.75rem 0 0.25rem; }
 .news-list img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
 .news-list figcaption { margin-top: 0.4rem; font-size: 0.875rem; color: var(--muted); }
+/* Phones and narrow tablets (one-column layout): show the animation at half width */
+@media (max-width: 59.99rem) {
+  .news-list img { width: 50%; }
+}
 @media (max-width: 30rem) {
   .news-list li { padding-left: 0; }
   .news-list .when { position: static; display: block; margin-bottom: 0.15rem; }
