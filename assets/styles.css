@@ -1,0 +1,229 @@
+/* Moor Lab — all styling for the website. Quarto copies this file to docs/assets/.
+   Adapted from the hand-written site so it fits the HTML that Quarto generates from index.qmd.
+   Palette borrows from Goldner's trichrome: mineralized bone stains green, osteoid stains red. */
+
+:root {
+  --bg: #f4f6f5;
+  --surface: #e8edeb;
+  --ink: #17222b;
+  --muted: #52616b;
+  --rule: #cfd8d5;
+  --green: #1d7356;
+  --red: #b3343f;
+  --dot: #9eabb3;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --measure: 66ch;
+  --header: 3.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101715;
+    --surface: #18211f;
+    --ink: #e4ebe8;
+    --muted: #9cada8;
+    --rule: #2b3734;
+    --green: #5ec29b;
+    --red: #f07b85;
+    --dot: #4d5d59;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header) + 1rem); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 1.0625rem/1.6 var(--sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap { width: 100%; max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+
+a { color: var(--green); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 2px; }
+
+.skip {
+  position: absolute; left: 1rem; top: -3rem;
+  background: var(--ink); color: var(--bg); padding: 0.5rem 0.8rem; z-index: 20;
+}
+.skip:focus { top: 0.5rem; }
+
+/* Header and section navigation */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+.top-inner {
+  display: flex; align-items: center; gap: 1.5rem;
+  min-height: var(--header);
+}
+.brand {
+  font-family: var(--serif); font-size: 1.15rem;
+  color: var(--ink); text-decoration: none; white-space: nowrap;
+}
+.top nav { margin-left: auto; min-width: 0; }
+.top nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.1rem; }
+.top nav a { color: var(--muted); text-decoration: none; white-space: nowrap; font-size: 0.95rem; }
+.top nav a:hover { color: var(--ink); }
+
+/* Phones: brand on its own row, sections scroll sideways underneath */
+@media (max-width: 52rem) {
+  :root { --header: 5.6rem; }
+  .top-inner { flex-direction: column; align-items: stretch; gap: 0.3rem; padding-top: 0.6rem; padding-bottom: 0.2rem; }
+  .top nav { margin-left: -1.25rem; margin-right: -1.25rem; overflow-x: auto; scrollbar-width: none; }
+  .top nav::-webkit-scrollbar { display: none; }
+  .top nav ul { padding: 0.35rem 1.25rem 0.55rem; gap: 1.1rem; }
+}
+
+/* Hero */
+.hero { padding: 3.5rem 0 3rem; }
+.affil { margin: 0 0 1rem; color: var(--muted); font-size: 0.95rem; max-width: var(--measure); }
+.hero h1 {
+  margin: 0; font-family: var(--serif); font-weight: 400;
+  font-size: clamp(3.4rem, 18vw, 8rem); line-height: 0.92; letter-spacing: -0.02em;
+}
+.lede {
+  margin: 1.5rem 0 0; max-width: 38ch;
+  font-family: var(--serif); font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.4;
+}
+
+/* QTL mapping figure */
+.qtl-fig { margin-top: 2.75rem; margin-bottom: 0; }
+.qtl-fig img {
+  display: block;
+  width: 100%;
+  max-width: 460px;   /* half size on desktop; phones use the full width */
+  height: auto;
+  background: #fff;          /* the plot has a white background; keep it framed in dark mode */
+  padding: 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+.qtl-fig figcaption { margin-top: 0.75rem; max-width: var(--measure); font-size: 0.9rem; color: var(--muted); }
+
+.pi {
+  margin-top: 2.5rem; padding: 0.25rem 1.5rem 0.75rem;
+  background: var(--surface); max-width: calc(var(--measure) + 3rem);
+}
+
+/* Home, lower half: PI and News side by side on wide screens */
+.home-lower { display: grid; gap: 0 3rem; }
+@media (min-width: 60rem) {
+  .home-lower { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: start; }
+  .home-lower .pi { max-width: none; }
+}
+.news { margin-top: 2.5rem; }
+.news h3 { margin-top: 0; }
+.news-list ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.news-list li {
+  position: relative; margin: 0;
+  padding: 0.75rem 0 0.75rem 6.5rem; border-bottom: 1px solid var(--rule);
+}
+.news-list .when {
+  position: absolute; left: 0; top: 0.85rem; width: 5.5rem;
+  color: var(--green); font-variant-numeric: tabular-nums; font-size: 0.95rem;
+}
+@media (max-width: 30rem) {
+  .news-list li { padding-left: 0; }
+  .news-list .when { position: static; display: block; margin-bottom: 0.15rem; }
+}
+
+
+/* Quarto wraps text in <p> inside the styled boxes; let the box control the spacing */
+.affil p, .lede p, .pi-head p { margin: 0; }
+.qtl-fig figure { margin: 0; }
+.pi h3 { margin-top: 1.25rem; }
+.pi-head { display: flex; align-items: flex-end; gap: 1.1rem; margin-top: 1.25rem; }
+.pi-head h3 { margin: 0 0 0.25rem; }
+.headshot {
+  flex: none;
+  display: block;
+  width: 112px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--rule);
+}
+.pi-head section { min-width: 0; }
+
+/* Sections: every "## Heading {#id}" in index.qmd becomes <section class="level2">.
+   The padding reproduces the centred 68rem column (.wrap) of the original site. */
+section.level2 {
+  padding: 3.5rem max(1.25rem, calc((100% - 68rem) / 2 + 1.25rem));
+  border-top: 1px solid var(--rule);
+}
+section.level2 p, section.level2 ul, section.level2 dl { max-width: var(--measure); }
+section.level2 .dated ul { max-width: 52rem; }
+section.level2 .people ul, section.level2 .link-grid ul { max-width: none; }
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.2; }
+h2 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); margin: 0 0 1.25rem; }
+h3 { font-size: 1.35rem; margin: 2.25rem 0 0.9rem; }
+h2 + section.level3 > h3:first-child { margin-top: 0.5rem; }
+
+/* Plain bullet lists (funding, media) */
+section.level2 ul { padding-left: 1.1rem; }
+section.level2 li { margin-bottom: 0.5rem; }
+section.level2 li::marker { color: var(--green); }
+
+/* ::: questions  (definition list: term, then ": answer") */
+.questions dl { margin: 0; padding: 0; }
+.questions dt, .questions dd { border-left: 3px solid var(--green); padding-left: 1rem; }
+.questions dt { font-weight: 600; padding-top: 0.9rem; }
+.questions dd { margin: 0 0 0.75rem; padding-top: 0.2rem; padding-bottom: 0.9rem; color: var(--muted); }
+
+/* ::: pubs */
+section.level2 .pubs li { margin-bottom: 0.85rem; }
+.pubs .title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.pubs a { overflow-wrap: anywhere; }
+.note { display: block; font-size: 0.95rem; color: var(--muted); }
+.more { display: block; margin-top: 0.5rem; }
+
+/* ::: dated  (CV and courses: "[when]{.when} text") */
+section.level2 .dated ul { list-style: none; padding: 0; margin: 0; }
+section.level2 .dated li {
+  position: relative; margin: 0;
+  padding: 0.6rem 0 0.6rem 8.5rem; border-bottom: 1px solid var(--rule);
+}
+.dated .when {
+  position: absolute; left: 0; width: 7.5rem;
+  color: var(--muted); font-variant-numeric: tabular-nums;
+}
+@media (max-width: 30rem) {
+  section.level2 .dated li { padding-left: 0; }
+  .dated .when { position: static; display: block; font-size: 0.9rem; }
+}
+
+/* ::: people  ("**Name** role") */
+section.level2 .people ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0 2rem; }
+@media (min-width: 46rem) { section.level2 .people ul { grid-template-columns: 1fr 1fr; max-width: 60rem; } }
+section.level2 .people li { margin: 0; padding: 0.65rem 0; border-bottom: 1px solid var(--rule); color: var(--muted); font-size: 0.95rem; }
+.people strong { display: block; font-weight: 600; color: var(--ink); font-size: 1.0625rem; }
+@media (max-width: 30rem) { .people strong { font-size: 1rem; } }
+
+/* ::: link-grid  (two columns of links) */
+.link-grid { display: grid; gap: 0 2.5rem; }
+@media (min-width: 46rem) { .link-grid { grid-template-columns: 1fr 1fr; max-width: 56rem; } }
+section.level2 .link-grid ul { list-style: none; margin: 0; padding: 0; }
+section.level2 .link-grid li { margin: 0; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); }
+
+/* Footer with address (_includes/footer.html) */
+.foot { padding: 2.5rem 0 3rem; border-top: 1px solid var(--rule); background: var(--surface); }
+.foot-grid { display: grid; gap: 1.25rem; }
+@media (min-width: 46rem) { .foot-grid { grid-template-columns: 1fr auto; align-items: end; } }
+address { font-style: normal; line-height: 1.7; }
+.copy { margin: 0; color: var(--muted); font-size: 0.875rem; }
+
+@media (max-width: 30rem) {
+  body { font-size: 1rem; }
+  .hero { padding-top: 2.25rem; }
+}
